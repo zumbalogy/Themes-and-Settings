@@ -1,0 +1,13 @@
+[
+
+{"keys": ["("], "command": "insert", "args": {"characters": "("}} ,
+{"keys": ["\""], "command": "insert", "args": {"characters": "\""}} ,
+{"keys": ["'"], "command": "insert", "args": {"characters": "'"}},
+{"keys": ["{"], "command": "insert", "args": {"characters": "{"}},
+{"keys": ["["], "command": "insert", "args": {"characters": "["}},
+{"keys": ["#"], "command": "insert", "args": {"characters": "#"}},
+{"keys": [":"], "command": "insert", "args": {"characters": ":"}}
+
+
+
+]
