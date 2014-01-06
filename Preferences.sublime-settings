@@ -3,7 +3,7 @@
 	"caret_style": "blink",
 	"color_scheme": "Packages/Dayle Rees Color Schemes/Monokai_custom.tmTheme",
 	"create_window_at_startup": true,
-	"font_face": "dejavu sans mono",
+	"font_face": "dejavu sans mono slashed",
 	"font_size": 12,
 	"hot_exit": false,
 	"ignored_packages":
