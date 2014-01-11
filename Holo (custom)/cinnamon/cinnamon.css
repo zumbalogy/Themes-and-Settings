@@ -8,12 +8,12 @@ stage {
 }
 
 .cinnamon-link {
-    color: #33B5E5;
+    color: #B5B5B5;
     text-decoration: underline;
 }
 
 .cinnamon-link:hover {
-    color: #33B5E5;
+    color: #B5B5B5;
 }
 
 .label-shadow {
@@ -170,7 +170,7 @@ StTooltip StLabel {
 }
 
 .popup-menu-item:active {
-    background-color: rgba(132,224,0,0.5);
+    background-color: rgba(132,132,132,0.5);
 }
 
 .popup-menu-item:insensitive {
@@ -200,8 +200,8 @@ StTooltip StLabel {
     -slider-height: 0.3em;
     -slider-background-color: #444;
     -slider-border-color: #444;
-    -slider-active-background-color: #84C800;
-    -slider-active-border-color: #84C800;
+    -slider-active-background-color: #C7C7C7;
+    -slider-active-border-color: #C7C7C7;
     -slider-border-width: 0;
     -slider-handle-radius: 0.4em;
 }
@@ -295,7 +295,7 @@ StTooltip StLabel {
 .panel-status-button:hover,
 .panel-button:hover {
     color: white;
-    background: rgba(132,224,0,0.5);
+    background: rgba(132,132,132,0.5);
 }
 
 .panel-status-button:active,
