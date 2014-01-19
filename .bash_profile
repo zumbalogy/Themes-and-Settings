@@ -49,6 +49,9 @@ git config --global color.ui auto
 
 
 function wdi_nyc_proc_nav() {
-    cd ~/ga/WDI_NYC_Proc/w0$1/d0$2/___your_name_here____
+    cd ~/ga/WDI_NYC_Proc/w0$1/d0$2/Sanjay_Harvey
 }
 alias ga=wdi_nyc_proc_nav
+
+
+alias add='git add -A; git status'
