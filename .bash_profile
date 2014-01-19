@@ -56,3 +56,6 @@ alias ga=wdi_nyc_proc_nav
 
 alias add='git add -A; git status'
 alias commit='git commit -m'
+alias red='redshift -l 41.1:-73.4 -v -t'
+
+
