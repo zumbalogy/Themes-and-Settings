@@ -55,3 +55,4 @@ alias ga=wdi_nyc_proc_nav
 
 
 alias add='git add -A; git status'
+alias commit='git commit -m'
