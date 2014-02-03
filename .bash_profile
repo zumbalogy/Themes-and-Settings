@@ -25,7 +25,7 @@ fi
 
 
 
-
+alias light="sudo ~/LightTable/deploy/LightTable"
  
  
 # prompt colors
