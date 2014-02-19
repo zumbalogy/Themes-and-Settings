@@ -17,8 +17,7 @@ fi
 
 
 
-
-
+export PATH=$HOME/bin:$PATH
 
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
@@ -42,14 +41,14 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind '"\eOA": history-search-backward'
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 
 git config --global color.ui auto
 
 
 
 function wdi_nyc_proc_nav() {
-    cd ~/ga/WDI_NYC_Proc/w0$1/d0$2/Sanjay_Harvey
+    cd ~/ga/WDI_NYC_Proc/w$1/d0$2/Sanjay_Harvey
 }
 alias ga=wdi_nyc_proc_nav
 
