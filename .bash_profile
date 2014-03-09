@@ -61,5 +61,18 @@ alias mongo='mongod --dbpath ~/mongodb-linux-x86_64-2.4.9/data/'
 
 
 
+function euler() {
+  if [ $1 == "rb" ]
+    then
+    ruby ~/euler/p$2/p$2.rb
+  elif [ $1 == "js" ]
+    then
+    nodejs ~/euler/p$2/p$2.js
+  fi
+}
+
+alias e=euler
+
+
 
 
