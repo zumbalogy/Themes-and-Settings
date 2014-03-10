@@ -54,7 +54,12 @@ alias ga=wdi_nyc_proc_nav
 
 
 alias add='git add -A :/; git status'
-alias commit='git commit -m'
+
+function commit() {
+    git commit -m "$*"
+}
+alias commit=commit
+
 alias red='redshift -l 41.1:-73.4 -v -t'
 
 alias mongo='mongod --dbpath ~/mongodb-linux-x86_64-2.4.9/data/'
