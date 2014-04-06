@@ -78,6 +78,5 @@ function euler() {
 
 alias e=euler
 
-
-
+alias v='vim -c "source ~/.vimrc"'
 
