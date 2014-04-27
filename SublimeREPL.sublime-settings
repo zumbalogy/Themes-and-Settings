@@ -1,10 +1,6 @@
 {
     "repl_view_settings": {
         "translate_tabs_to_spaces": true,
-        "auto_indent": false,
-        "smart_indent": false,
-        "indent_subsequent_lines": false,
-        "detect_indentation": true,
         "auto_complete": false
     }
 }
