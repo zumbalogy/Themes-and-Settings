@@ -1,6 +1,13 @@
 {
     "repl_view_settings": {
         "translate_tabs_to_spaces": true,
-        "auto_complete": false
+        "auto_complete": false,
+        
+        "translate_tabs_to_spaces": false,
+        "auto_indent": false,
+        "smart_indent": false,
+        "spell_check": false,
+        "indent_subsequent_lines": false,
+        "detect_indentation": false,
     }
 }
