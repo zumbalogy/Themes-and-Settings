@@ -74,7 +74,7 @@ alias e=euler
 
 alias v='vim -c "source ~/.vimrc"'
 
-# alias sho='ls -Ahog  --group-directories-first'
+alias show='ls -Ahog  --group-directories-first'
 alias sho='ls -A --group-directories-first'
 
 
