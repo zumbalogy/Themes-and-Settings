@@ -8,25 +8,17 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-
-
 export PATH=$HOME/bin:$PATH
-
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
-
-
 alias light="sudo ~/LightTable/deploy/LightTable"
- 
- 
+
 # prompt colors
 # "username@hostname:"
 PS1="\e[34;01m\u\e[0m@\e[31;01m\h\e[0m:"
@@ -41,11 +33,7 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind '"\eOA": history-search-backward'
 
-
-
 git config --global color.ui auto
-
-
 
 alias add='git add -A :/; git status'
 
@@ -57,7 +45,6 @@ alias commit=commit
 alias red='redshift -l 41.1:-73.4 -v -t'
 
 alias mongo='mongod --dbpath ~/mongodb-linux-x86_64-2.4.9/data/'
-
 
 
 function euler() {
@@ -77,4 +64,4 @@ alias v='vim -c "source ~/.vimrc"'
 alias show='ls -Ahog  --group-directories-first'
 alias sho='ls -A --group-directories-first'
 
-
+alias ..='cd ..'
