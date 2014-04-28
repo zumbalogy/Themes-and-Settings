@@ -4,7 +4,7 @@ begin
     # in the .aprc
     Pry.config.print = proc { |output, value| output.puts "# => " + value.ai ; puts }
 rescue LoadError => err
-    puts "no awesome_print :("
+    puts "no awesome_print"
 end
 
 Pry.config.prompt = [

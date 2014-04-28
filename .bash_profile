@@ -47,12 +47,6 @@ git config --global color.ui auto
 
 
 
-function wdi_nyc_proc_nav() {
-    cd ~/ga/WDI_NYC_Proc/w$1/d0$2/Sanjay_Harvey
-}
-alias ga=wdi_nyc_proc_nav
-
-
 alias add='git add -A :/; git status'
 
 function commit() {
@@ -79,4 +73,6 @@ function euler() {
 alias e=euler
 
 alias v='vim -c "source ~/.vimrc"'
+
+alias sho='ls -Shoga'
 
