@@ -21,13 +21,12 @@ alias light="sudo ~/LightTable/deploy/LightTable"
 
 # prompt colors
 # "username@hostname:"
-PS1="\e[34;01m\u\e[0m@\e[31;01m\h\e[0m:"
+PS1="\e[34;01m\u\e[0m@\e[31;01m\h\e[0m"
+
  
 # "path/to/where/you/are"
-PS1="$PS1\e[32;01m\w\e[0m"
+PS1="$PS1\e[32;01m\w\e[0m \n"
  
-# "(gitbranch)"
-PS1="$PS1 \$([[ -n \$(git branch 2> /dev/null) ]] && echo \" \")\[\033[1;33m\]\[\033[1;37m\]\n\$ \[$(tput sgr0)\]"
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
@@ -65,3 +64,5 @@ alias show='ls -Ahog  --group-directories-first'
 alias sho='ls -A --group-directories-first'
 
 alias ..='cd ..'
+
+([ -d .git ] && echo $(git rev-parse --abbrev-ref HEAD))
