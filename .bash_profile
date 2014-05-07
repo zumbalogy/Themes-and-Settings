@@ -67,9 +67,9 @@ alias ..='cd ..'
 
 function cd_git(){
     cd $1
-    ( __gitdir &>/dev/null  && echo -e "\e[1;37m$(git rev-parse --abbrev-ref HEAD)\e[0m")
+    ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")
 }    
 
 alias cd=cd_git
 
-( __gitdir &>/dev/null  && echo -e "\e[1;37m$(git rev-parse --abbrev-ref HEAD)\e[0m")
+( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")
