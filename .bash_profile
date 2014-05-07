@@ -21,11 +21,11 @@ alias light="sudo ~/LightTable/deploy/LightTable"
 
 # prompt colors
 # "username@hostname:"
-PS1="\e[34;01m\u\e[0m@\e[31;01m\h\e[0m"
+# PS1="\e[34;01m\u\e[0m\e[31;01m\h\e[0m"
 
  
 # "path/to/where/you/are"
-PS1="$PS1\e[32;01m\w\e[0m \n"
+PS1="\e[32;01m\w\e[0m \n"
  
 
 bind '"\e[A": history-search-backward'
@@ -65,4 +65,11 @@ alias sho='ls -A --group-directories-first'
 
 alias ..='cd ..'
 
-([ -d .git ] && echo $(git rev-parse --abbrev-ref HEAD))
+function cd_git(){
+    cd $1
+    ( __gitdir &>/dev/null  && echo -e "\e[1;37m$(git rev-parse --abbrev-ref HEAD)\e[0m")
+}    
+
+alias cd=cd_git
+
+( __gitdir &>/dev/null  && echo -e "\e[1;37m$(git rev-parse --abbrev-ref HEAD)\e[0m")
