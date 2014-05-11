@@ -25,7 +25,7 @@ alias light="sudo ~/LightTable/deploy/LightTable"
 
  
 # "path/to/where/you/are"
-PS1="\e[32;01m\w\e[0m \n"
+PS1="\e[32;01m\w\e[0m \n ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")"
  
 
 bind '"\e[A": history-search-backward'
