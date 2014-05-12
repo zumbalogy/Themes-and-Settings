@@ -1,11 +1,4 @@
-begin
-    require "awesome_print"
-    # AwesomePrint.defaults = {multiline: false} 
-    # in the .aprc
-    Pry.config.print = proc { |output, value| output.puts "# => " + value.ai ; puts }
-rescue LoadError => err
-    puts "no awesome_print"
-end
+Pry.config.print = proc { |output, value| output.puts "# => " + value.inspect ; puts }
 
 Pry.config.prompt = [
     proc { "" },
