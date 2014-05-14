@@ -25,7 +25,7 @@ alias light="sudo ~/LightTable/deploy/LightTable"
 
  
 # "path/to/where/you/are"
-PS1="\e[32;01m\w\e[0m \n ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")"
+PS1="\e[32;01m\w\e[0m \n"
  
 
 bind '"\e[A": history-search-backward'
@@ -70,6 +70,12 @@ function cd_git(){
     ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")
 }    
 
+function git_stat(){
+  (__gitdir &>/dev/null && echo -e "\e[0;35m$(git status)\e[0m")
+  pwd
+}
+
 alias cd=cd_git
+alias pwd=git_stat
 
 ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")

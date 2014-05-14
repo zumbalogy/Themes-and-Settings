@@ -1,13 +1,11 @@
-Pry.config.print = proc { |output, value| output.puts "# => " + value.inspect ; puts }
+Pry.config.print = proc { |output, value| output.puts '# => ' + CodeRay.scan(value.inspect, :ruby).encode(:terminal) ; puts }
 
 Pry.config.prompt = [
-    proc { "" },
+    proc { '' },
     # proc { ":>> " },  
     # proc { "\u001B[35m>>:\u001B[m " },
-    proc { "" }
+    proc { '' }
 ]
-
-Pry.config.prompt_name = 'my_project_name'
 
 puts "# " + Time.now.strftime("%H:%M %d-%m-%Y") 
 
