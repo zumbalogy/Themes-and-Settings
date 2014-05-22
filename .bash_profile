@@ -77,5 +77,7 @@ function git_stat(){
 
 alias cd=cd_git
 alias pwd=git_stat
+alias diff='git diff'
+alias cached='git diff --cached'
 
 ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")

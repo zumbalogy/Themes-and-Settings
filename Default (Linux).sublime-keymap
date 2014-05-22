@@ -50,5 +50,7 @@
     "args": { "setting": "line_numbers"}
 },
 { "keys": ["ctrl+shift+b"], "command": "toggle_side_bar" },
-{ "keys": ["ctrl+shift+z"], "command": "toggle_tabs" }
+{ "keys": ["ctrl+shift+z"], "command": "toggle_tabs" },
+{ "keys": ["ctrl+shift+u"], "command": "toggle_menu" },
+{ "keys": ["ctrl+shift+g"], "command": "find_all_under"}
 ]
