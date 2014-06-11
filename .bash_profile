@@ -84,3 +84,11 @@ alias pwd=git_stat
 
 alias diff='git diff HEAD'
 alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
+
+
+shopt -s histappend
+
+HISTFILESIZE=5000
+HISTSIZE=1000
+HISTCONTROL=ignoredups
+HISTIGNORE='sho:add'
