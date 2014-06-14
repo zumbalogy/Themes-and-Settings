@@ -49,8 +49,19 @@
     "command": "toggle_setting",
     "args": { "setting": "line_numbers"}
 },
+{
+    "keys": ["ctrl+shift+c"],
+    "command": "toggle_setting",
+    "args": {"setting": "draw_centered"}
+},
 { "keys": ["ctrl+shift+b"], "command": "toggle_side_bar" },
 { "keys": ["ctrl+shift+z"], "command": "toggle_tabs" },
 { "keys": ["ctrl+shift+u"], "command": "toggle_menu" },
+// { "keys": ["ctrl+shift+c"], "command": "view.settings().set('draw_centered', not view.settings().get('draw_centered'))" },
 { "keys": ["ctrl+shift+g"], "command": "find_all_under"}
 ]
+
+
+
+
+

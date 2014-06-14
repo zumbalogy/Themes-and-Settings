@@ -6,18 +6,18 @@
 	"create_window_at_startup": false,
 	"enable_tab_scrolling": false,
 	"font_face": "dejavu sans mono slashed",
-	"font_size": 15,
+	"font_size": 12,
 	"hot_exit": false,
 	"ignored_packages":
 	[
-		"Browser Integration",
-		"Better JavaScript",
-		"paredit",
-		"AppleScript",
 		"Dark Pastel Color Scheme",
-		"AdvancedNewFile",
+		"Better JavaScript",
 		"BracketHighlighter",
-		"Vintage"
+		"AppleScript",
+		"Vintage",
+		"Browser Integration",
+		"paredit",
+		"AdvancedNewFile"
 	],
 	"index_files": true,
 	"line_numbers": false,
@@ -31,9 +31,11 @@
 	"save_on_focus_lost": true,
 	"shift_tab_unindent": true,
 	"show_tab_close_buttons": true,
+	"tab_size": 2,
 	"theme": "Centurion Blue.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"tree_animation_enabled": false,
 	"word_wrap": true,
-	"tab_size": 2,
+	"fold_buttons": false,
+	"margin": 4
 }
