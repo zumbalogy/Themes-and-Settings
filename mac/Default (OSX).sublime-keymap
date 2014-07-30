@@ -1,0 +1,77 @@
+[
+
+{"keys": ["("], "command": "insert", "args": {"characters": "("}} ,
+{"keys": ["\""], "command": "insert", "args": {"characters": "\""}} ,
+{"keys": ["'"], "command": "insert", "args": {"characters": "'"}},
+{"keys": ["{"], "command": "insert", "args": {"characters": "{"}},
+{"keys": ["["], "command": "insert", "args": {"characters": "["}},
+{"keys": ["#"], "command": "insert", "args": {"characters": "#"}},
+{"keys": [":"], "command": "insert", "args": {"characters": ":"}},
+
+
+{ "keys": ["\""], "command": "insert", "args": {"characters": "\""}, "context":
+    [
+        { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+        { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+        { "key": "following_text", "operator": "regex_contains", "operand": "^\"", "match_all": true }
+    ]
+},
+{ "keys": [")"], "command": "insert", "args": {"characters": ")"}, "context":
+    [
+        { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+        { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+        { "key": "following_text", "operator": "regex_contains", "operand": "^\\)", "match_all": true }
+    ]
+},
+{ "keys": ["'"], "command": "insert", "args": {"characters": "'"}, "context":
+    [
+        { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+        { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+        { "key": "following_text", "operator": "regex_contains", "operand": "^'", "match_all": true }
+    ]
+},
+{ "keys": ["]"],"command": "insert", "args": {"characters": "]"}, "context":
+    [
+        { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+        { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+        { "key": "following_text", "operator": "regex_contains", "operand": "^\\]", "match_all": true }
+    ]
+},
+{ "keys": ["}"], "command": "insert", "args": {"characters": "}"}, "context":
+    [
+        { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+        { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+        { "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
+    ]
+},
+{
+    "keys": ["ctrl+shift+l"],
+    "command": "toggle_setting",
+    "args": { "setting": "line_numbers"}
+},
+{
+    "keys": ["ctrl+shift+c"],
+    "command": "toggle_setting",
+    "args": {"setting": "draw_centered"}
+},
+{ "keys": ["ctrl+shift+b"], "command": "toggle_side_bar" },
+{ "keys": ["ctrl+shift+z"], "command": "toggle_tabs" },
+{ "keys": ["ctrl+shift+u"], "command": "toggle_menu" },
+// { "keys": ["ctrl+shift+c"], "command": "view.settings().set('draw_centered', not view.settings().get('draw_centered'))" },
+{ "keys": ["ctrl+shift+g"], "command": "find_all_under"},
+{ "keys": ["ctrl+shift+p"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+{ "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+{ "keys": ["ctrl+p"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+{ "keys": ["ctrl+y"], "command": "redo"},
+{ "keys": ["ctrl+forward_slash"], "command": "toggle_comment", "args": { "block": false } },
+{ "keys": ["ctrl+t"], "command": "new_file" },
+{ "keys": ["ctrl+]"], "command": "indent" },
+{ "keys": ["ctrl+["], "command": "unindent" },
+{ "keys": ["ctrl+d"], "command": "find_under_expand" },
+{ "keys": ["ctrl+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line.sublime-macro"} }
+
+]
+
+
+
+
