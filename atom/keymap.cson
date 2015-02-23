@@ -1,0 +1,24 @@
+# You can find more information about keymaps in these guides:
+# * https://atom.io/docs/latest/customizing-atom#customizing-key-bindings
+# * https://atom.io/docs/latest/advanced/keymaps
+#
+# This file uses CoffeeScript Object Notation (CSON).
+
+'atom-workspace':
+  'ctrl-shift-b': 'tree-view:toggle' # and maybe make it not focus it
+  'ctrl-alt-down': 'editor:move-line-down'
+  'ctrl-alt-up': 'editor:move-line-up'
+  'ctrl-0': 'pane:split-right'
+  'ctrl-9': 'custom:close-other-panes'
+  'ctrl-;': 'custom:toggle-line-numbers'
+
+'.platform-darwin atom-text-editor':
+  'cmd-g': 'find-and-replace:select-all'
+  'cmd-tab': 'unset!'
+
+'.platform-darwin':
+  'ctrl-b': 'tree-view:toggle-focus'
+
+'atom-workspace atom-text-editor:not([mini])':
+  'ctrl-]': 'editor:indent-selected-rows'
+  'ctrl-[': 'editor:outdent-selected-rows'

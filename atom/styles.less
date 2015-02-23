@@ -1,0 +1,76 @@
+body {
+  // -webkit-font-smoothing: antialiased;
+  font-weight: 100;
+  // text-rendering: optimizeLegibility;
+}
+
+.tree-view .list-group .icon:before, .list-tree .icon:before {
+  display: none;
+}
+
+.list-item, .list-group .selected:before, .list-tree .selected:before {
+  font-size: 12px;
+}
+
+.tab-bar {
+  .tab, .tab[data-type='TextEditor'] {
+    background-color: #2e333a;
+    .close-icon:before {
+      display: none;
+    }
+    &.active {
+      background: #3a414a;
+    }
+  }
+}
+
+atom-pane.active .tab-bar:empty:before, atom-pane.active .tab.active:before {
+  display: none;
+}
+
+atom-panel-container {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tree-view {
+  .status-modified, .status-added {
+    color: #8592AD;
+    .name, .icon, :before {
+      color: #8592AD;
+    }
+  }
+}
+
+.editor, atom-text-editor::shadow {
+  padding-left: 4px;
+  .line-number {
+    color: #777;
+    opacity: 1;
+  }
+  .line-number.cursor-line {
+    color: #ccc;
+  }
+  .cursor-line {
+    background-color: rgba(0,0,0,0);
+  }
+  .line {
+    padding-left: 0;
+  }
+}
+
+atom-panel.left {
+  border-right: 0;
+}
+
+.tooltip.fade.bottom.in {
+  display: none !important;
+}
+
+// want border bottom on tab bar, and maybe tab colors, to be better
+// make matched brackets be more subtle in style
+
+// maybe make cursor gray and/or thinner
+
+// get rid of hover helpers for tabs (could just make them display none)

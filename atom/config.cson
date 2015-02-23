@@ -1,0 +1,87 @@
+"*":
+  editor:
+    invisibles: {}
+    fontSize: 18
+    fontFamily: "Source Code Pro"
+    showLineNumbers: false
+  core:
+    themes: [
+      "one-dark-ui"
+      "one-dark-syntax"
+    ]
+    audioBeep: false
+    disabledPackages: [
+      "metrics"
+      "wrap-guide"
+      "status-bar"
+      "nrepl"
+      "auto-reveal-in-sidebar"
+      "styleguide"
+      "git-diff"
+      "exception-reporting"
+      "fuzzy-finder"
+      "atom-coffee-repl"
+      "copy-filename"
+      "terminal-panel"
+      "pane-move-plus"
+      "keybinding-resolver"
+      "pairing-chat"
+      "motepair"
+      "one-tab"
+      "bookmarks"
+      "background-tips"
+      "snippets"
+      "encoding-selector"
+      "welcome"
+      "go-to-line"
+      "autoflow"
+      "link"
+      "language-toml"
+      "language-todo"
+      "language-php"
+      "language-csharp"
+      "fonts"
+      "timecop"
+      "bracket-matcher"
+      "spell-check"
+      "language-perl"
+      "autocomplete"
+      "language-mustache"
+      "language-make"
+      "atom-browser-webview"
+    ]
+    ignoredNames: [
+      ".class"
+    ]
+  "exception-reporting":
+    userId: "fb3c8028-464e-acc6-746b-778205e3ba6b"
+  welcome:
+    showOnStartup: false
+  "bracket-matcher":
+    autocompleteBrackets: false
+    autocompleteSmartQuotes: false
+    wrapSelectionsInBrackets: false
+  autosave:
+    enabled: true
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "fuzzy-finder": {}
+  "fuzzy-finder-plus": {}
+  "highlight-selected": {}
+  "terminal-status": {}
+  "terminal-panel": {}
+  "highlight-line":
+    enableUnderline: true
+  fonts:
+    fontFamily: "Source Code Pro Extra Light"
+  "find-and-replace":
+    openProjectFindResultsInRightPane: true
+  "atom-pair": {}
+  motepair: {}
+  tabs:
+    hideTabBarWhenOnlyOneTabIsOpen: true
+    showIcons: false
+  "spell-check": {}
+  "grammar-selector":
+    showOnRightSideOfStatusBar: false
+  "web-browser": {}
