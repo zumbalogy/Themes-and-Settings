@@ -94,6 +94,7 @@ alias rake='bundle exec rake'
 function euler() {
   dir=$1
   file=$1
+  # maybe make file have the leading p, or be swapped with notes if there is a $3
   if [[ $1 =~ ^.$ ]]
     then
     dir=0$1
@@ -135,30 +136,30 @@ alias e=euler
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# function log_git() {
-#   if [[ $1 ]]
-#     then
-#     count=$1
-#   else
-#     count=4
-#   fi
-#   git log -${count} --pretty=format:"%C(blue)%h %ar%C(reset) %an: %s%n" --stat | ruby -e '
-#     while a = gets
-#       next if a.match(/\d+ fil(e|es) changed, \d+ insertio(n|ns)\(\+\), \d+ deletion/)
-#       if (m = a.match(/.*\//)) && a.match(/(\+|\-)/)
-#         len = m.to_s.length
-#         a.sub!(" +", (" " * len) + "+")
-#         a.sub!(" -", (" " * len) + "-")
-#         a.sub!(m.to_s, "")
-#       end
-#       a.sub!("+", "\033[32m+")
-#       a.sub!("-", "\033[31m-")
-#       a += "\033[0m"
-#       a.gsub!(/ \|\s+\d+ /, " ")
-#       print a
-#     end
-#   '
-# }
+function log_git() {
+  if [ $1 ]
+    then
+    count=$1
+  else
+    count=4
+  fi
+  git log -${count} --pretty=format:"%C(blue)%h %ar%C(reset) %an: %s%n" --stat | ruby -e '
+    while a = gets
+      next if a.match(/\d+ fil(e|es) changed, \d+ insertio(n|ns)\(\+\), \d+ deletion/)
+      if (m = a.match(/.*\//)) && a.match(/(\+|\-)/)
+        len = m.to_s.length
+        a.sub!(" +", (" " * len) + "+")
+        a.sub!(" -", (" " * len) + "-")
+        a.sub!(m.to_s, "")
+      end
+      a.sub!("+", "\033[32m+")
+      a.sub!("-", "\033[31m-")
+      a += "\033[0m"
+      a.gsub!(/ \|\s+\d+ /, " ")
+      print a
+    end
+  '
+}
 # could maybe use grep -v, instead, to remove results.
 
 function log() {
@@ -170,4 +171,18 @@ function log() {
 
 alias log='log'
 
-alias -s '_spec.rb'=bundle exec rspec
+function try_spec() {
+  if [ $1 =~ .*_spec.rb ]
+    then
+    bundle exec rspec $1
+  fi
+}
+
+alias -s rb=try_spec
+
+function preexec() {
+  if [ $1 =~ .*_spec.rb ]
+    then
+    bundle exec rspec $1 # this sould maybe be n args
+  fi
+}
