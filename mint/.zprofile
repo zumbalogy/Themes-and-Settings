@@ -25,6 +25,16 @@ bindkey '\eOA' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 bindkey '\eOB' history-beginning-search-forward
 
+bindkey ';3C' end-of-line
+bindkey ';5C' forward-word
+bindkey ';3D' beginning-of-line
+bindkey ';5D' backward-word
+
+bindkey ';5A' history-search-backward
+bindkey ';3A' history-search-backward
+bindkey ';3B' history-search-forward
+bindkey ';5B' history-search-forward
+
 alias light="sudo ~/LightTable/deploy/LightTable"
 
 # "path/to/where/you/are"
