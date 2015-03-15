@@ -2,6 +2,8 @@
 source ~/.rvm/scripts/rvm
 source ~/.nvm/nvm.sh
 
+export PATH=${PATH}:/usr/lib/jvm/java-6-open-jdk/bin
+
 autoload -U colors && colors
 
 git config --global color.ui auto
@@ -94,42 +96,33 @@ alias rake='bundle exec rake'
 function euler() {
   dir=$1
   file=$1
-  # maybe make file have the leading p, or be swapped with notes if there is a $3
-  if [[ $1 =~ ^.$ ]]
-    then
+  # maybe be swapped with notes if there is a $3
+  # maybe have a command to run all of them prefixed by file name or something
+  if [[ $1 =~ ^.$ ]]; then
     dir=0$1
   fi
-  if [[ $1 =~ ^0.$ ]]
-    then
+  if [[ $1 =~ ^0.$ ]]; then
     file=${1:1}
   fi
-  if [ $2 == "rb" ]
-    then
-    ruby ~/euler/$dir/p$file.rb
-  elif [ $2 == "ruby" ]
-    then
-    ruby ~/euler/$dir/p$file.rb
-  elif [ $2 == "js" ]
-    then
-    node ~/euler/$dir/p$file.js
-  elif [ $2 == "node" ]
-    then
-    node ~/euler/$dir/p$file.js
-  elif [ $2 == "coffee" ]
-    then
-    coffee ~/euler/$dir/p$file.coffee
-  elif [ $2 == "clj" ]
-    then
-    lein exec ~/euler/$dir/p$file.clj
-  elif [ $2 == "clojure" ]
-    then
-    lein exec ~/euler/$dir/p$file.clj
-  elif [ $2 == "java" ]
-    then
-    javac ~/euler/$dir/p$file.java
-    java -classpath ~/euler/$dir p$file
-    rm ~/euler/$dir/p$file.class
-  fi
+  file=p$file
+  location=~/euler/$dir/$file
+  case "$2" in
+    rb      ) ruby $location.rb;;
+    ruby    ) ruby $location.rb;;
+    jl      ) julia $location.jl;;
+    julia   ) julia $location.jl;;
+    js      ) node $location.js;;
+    node    ) node $location.js;;
+    coffee  ) coffee $location.coffee;;
+    clj     ) lein exec $location.clj;;
+    clojure ) lein exec $location.clj;;
+    java    )
+      javac $location.java
+      java -classpath ~/euler/$dir $file
+      rm $location.class
+    ;;
+    *) echo "nothing found for $2";;
+  esac
 }
 
 alias e=euler
@@ -171,14 +164,11 @@ function log() {
 
 alias log='log'
 
-function try_spec() {
-  if [ $1 =~ .*_spec.rb ]
-    then
-    bundle exec rspec $1
-  fi
-}
-
-alias -s rb=try_spec
+alias -s rb=ruby
+alias -s js=node
+alias -s jl=julia
+alias -s coffee=coffee
+alias -s clj="lein exec"
 
 function preexec() {
   if [ $1 =~ .*_spec.rb ]
