@@ -37,6 +37,31 @@ bindkey ';3A' history-search-backward
 bindkey ';3B' history-search-forward
 bindkey ';5B' history-search-forward
 
+function _copy() {
+  echo $BUFFER | xclip -i -sel c
+}
+
+zle -N _copy
+
+bindkey ';6C' _copy
+bindkey ';6D' _copy
+
+function _delete_word() {
+  RBUFFER=$(echo $RBUFFER | sed "s/\(^\s*\w*\s*\|^[/~?<>,.:;'\"\[\(\)\!\@\#\$\%\^\&\*\=\+\{}\|\]\|^]\|^\-\)//")
+}
+
+zle -N _delete_word
+
+bindkey '^[[3;5~' _delete_word
+
+function _my_clear() {
+  echo "test"
+}
+
+zle -N _my_clear
+
+alias "^L"=_my_clear
+
 alias light="sudo ~/LightTable/deploy/LightTable"
 
 # "path/to/where/you/are"
