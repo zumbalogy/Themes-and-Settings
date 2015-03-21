@@ -54,21 +54,30 @@ zle -N _delete_word
 
 bindkey '^[[3;5~' _delete_word
 
+function _cd_jump() {
+  cd -;
+  zle reset-prompt;
+}
+
+zle -N _cd_jump
+
+bindkey '^_' _cd_jump
+
+# todo: this. also make it just scroll me, not blow away a whole frame like something stupid.
 function _my_clear() {
-  echo "test"
+  date;
+  zle clear-screen
 }
 
 zle -N _my_clear
 
-alias "^L"=_my_clear
+bindkey '^l' _my_clear
 
 alias light="sudo ~/LightTable/deploy/LightTable"
 
 # "path/to/where/you/are"
 # PS1=$'\033[0;32m%~\033[0m'$'\n' # maybe make bold
 PROMPT="%{$fg_bold[green]%}%~%{$reset_color%}"$'\n'
-
-# bind -x '"\C-l": date; clear' # todo: this. also make it just scroll me, not blow away a whole frame like something stupid.
 
 alias ..='cd ..'
 alias show='ls --color -A --group-directories-first -l'
