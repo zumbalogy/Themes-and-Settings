@@ -13,6 +13,12 @@ nvm use iojs > /dev/null
 date
 (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
 
+PROMPT="%{$fg_bold[green]%}%~%{$reset_color%}"$'\n'
+
+DIRSTACKSIZE=10
+DIRSTACKFILE=~/.zdirs
+setopt AUTO_PUSHD # todo: autocomplete on cd-, and also have it not print
+
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -55,13 +61,15 @@ zle -N _delete_word
 bindkey '^[[3;5~' _delete_word
 
 function _cd_jump() {
-  cd -;
+  pushd $OLDPWD > /dev/null
   zle reset-prompt;
 }
 
 zle -N _cd_jump
 
 bindkey '^_' _cd_jump
+
+# todo: maybe one for a popd. maybe non destrucive. maybe control shift slash. or maybe just one to go up. maybe control . or somehting
 
 # todo: this. also make it just scroll me, not blow away a whole frame like something stupid.
 function _my_clear() {
@@ -74,10 +82,6 @@ zle -N _my_clear
 bindkey '^l' _my_clear
 
 alias light="sudo ~/LightTable/deploy/LightTable"
-
-# "path/to/where/you/are"
-# PS1=$'\033[0;32m%~\033[0m'$'\n' # maybe make bold
-PROMPT="%{$fg_bold[green]%}%~%{$reset_color%}"$'\n'
 
 alias ..='cd ..'
 alias show='ls --color -A --group-directories-first -l'
