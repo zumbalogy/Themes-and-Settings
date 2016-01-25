@@ -1,76 +1,56 @@
-body {
-  // -webkit-font-smoothing: antialiased;
-  font-weight: 100;
-  // text-rendering: optimizeLegibility;
-}
-
-.tree-view .list-group .icon:before, .list-tree .icon:before {
-  display: none;
-}
-
-.list-item, .list-group .selected:before, .list-tree .selected:before {
-  font-size: 12px;
-}
-
-.tab-bar {
-  .tab, .tab[data-type='TextEditor'] {
-    background-color: #2e333a;
-    .close-icon:before {
-      display: none;
-    }
-    &.active {
-      background: #3a414a;
-    }
+atom-workspace-axis atom-pane-container atom-pane {
+  padding-top: 0px;
+  padding-right: 0px;
+  border-left: 1px solid #181a1f;
+  div.item-views {
+    border-left: 0;
   }
 }
 
-atom-pane.active .tab-bar:empty:before, atom-pane.active .tab.active:before {
-  display: none;
+ul.tab-bar {
+  li.tab::before {
+    width: 0;
+  }
+  li.tab::after, li.tab.active::after {
+    border-radius: 0;
+    background-image: none;
+    border-left: 0;
+    opacity: 0;
+  }
+  li.tab.sortable {
+    border: 0;
+    border-right: 1px solid #181818;
+  }
+  li.tab.active {
+    border-bottom: 1px solid #181818;
+    border-radius: 0;
+  }
+}
+.tab-bar .tab.active, .tab-bar .tab.active + .tab {
+  border-image: none;
 }
 
-atom-panel-container {
-  ::-webkit-scrollbar {
+atom-panel.tool-panel {
+  ol.tree-view {
+    // background-color: #21252b;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  span.icon::before {
     display: none;
   }
 }
 
-.tree-view {
-  .status-modified, .status-added {
-    color: #8592AD;
-    .name, .icon, :before {
-      color: #8592AD;
-    }
-  }
+.scrollbars-visible-always /deep/ ::-webkit-scrollbar-thumb {
+  display: none;
 }
 
-.editor, atom-text-editor::shadow {
-  padding-left: 4px;
-  .line-number {
-    color: #777;
-    opacity: 1;
-  }
-  .line-number.cursor-line {
-    color: #ccc;
-  }
-  .cursor-line {
-    background-color: rgba(0,0,0,0);
-  }
-  .line {
-    padding-left: 0;
-  }
+::-webkit-scrollbar {
+  display: none;
 }
 
-atom-panel.left {
-  border-right: 0;
+atom-text-editor.is-focused::shadow {
+  .line.cursor-line, .line-number.cursor-line-no-selection {
+    background-color: transparent;
+  }
 }
-
-.tooltip.fade.bottom.in {
-  display: none !important;
-}
-
-// want border bottom on tab bar, and maybe tab colors, to be better
-// make matched brackets be more subtle in style
-
-// maybe make cursor gray and/or thinner
-
-// get rid of hover helpers for tabs (could just make them display none)
