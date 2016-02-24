@@ -1,14 +1,8 @@
 # source ~/.profile
-source ~/.rvm/scripts/rvm
-source ~/.nvm/nvm.sh
-
-export PATH=${PATH}:/usr/lib/jvm/java-6-open-jdk/bin
 
 autoload -U colors && colors
 
 git config --global color.ui auto
-
-nvm use iojs > /dev/null
 
 date
 (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
@@ -128,9 +122,6 @@ function note() {
 alias note=note
 alias notes="tail -30 ~/notes/notes.txt"
 
-alias r=rspec
-alias rake='bundle exec rake'
-
 function euler() {
   dir=$1
   file=$1
@@ -208,9 +199,17 @@ alias -s jl=julia
 alias -s coffee=coffee
 alias -s clj="lein exec"
 
-function preexec() {
-  if [ $1 =~ .*_spec.rb ]
-    then
-    bundle exec rspec $1 # this sould maybe be n args
-  fi
-}
+export RABBITMQ_ADDRESS=tcp://10.129.242.20:1883
+
+# load virtualenvwrapper for python (after custom PATHs)
+venvwrap="virtualenvwrapper.sh"
+/usr/bin/which -a $venvwrap &> /dev/null
+if [ $? -eq 0 ]; then
+    venvwrap=`/usr/bin/which $venvwrap`
+    source $venvwrap
+fi
+
+alias json="jazor --colorize"
+alias clip='xclip -selection c'
+alias paste='xclip -selection clipboard -o'
+alias cat='pygmentize -g'
