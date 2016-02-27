@@ -11,7 +11,7 @@ PROMPT="%{$fg_bold[green]%}%~%{$reset_color%}"$'\n'
 
 DIRSTACKSIZE=10
 DIRSTACKFILE=~/.zdirs
-setopt AUTO_PUSHD # todo: autocomplete on cd-, and also have it not print
+setopt AUTO_PUSHD # TODO: autocomplete on cd-, and also have it not print
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -41,52 +41,55 @@ function _copy() {
   echo $BUFFER | xclip -i -sel c
 }
 
-zle -N _copy
-
-bindkey ';6C' _copy
-bindkey ';6D' _copy
-
-function _delete_word() {
-  RBUFFER=$(echo $RBUFFER | sed "s/\(^\s*\w*\s*\|^[/~?<>,.:;'\"\[\(\)\!\@\#\$\%\^\&\*\=\+\{}\|\]\|^]\|^\-\)//")
+function _toggle_sudo() {
+  local SAVE=$BUFFER
+  zle kill-whole-line
+  if [[ $SAVE =~ "sudo" ]]; then
+    local CLEAN=$(echo "$SAVE" | sed 's/^sudo //g')
+    zle -U "$CLEAN"
+  else
+    zle -U "sudo $SAVE"
+  fi
 }
-
-zle -N _delete_word
-
-bindkey '^[[3;5~' _delete_word
 
 function _cd_jump() {
   pushd $OLDPWD > /dev/null
   zle reset-prompt;
 }
 
-zle -N _cd_jump
-
-bindkey '^_' _cd_jump
-
-# todo: maybe one for a popd. maybe non destrucive. maybe control shift slash. or maybe just one to go up. maybe control . or somehting
-
-# todo: this. also make it just scroll me, not blow away a whole frame like something stupid.
+# TODO: make it just scroll, not print a whole frame.
 function _my_clear() {
   date;
   zle clear-screen
 }
 
+zle -N _copy
+zle -N _toggle_sudo
+zle -N _cd_jump
 zle -N _my_clear
 
+bindkey ';6C' _copy
+bindkey ';6D' _copy
+bindkey '^[[3;5~' backward-kill-word
+bindkey '^@' _toggle_sudo
+bindkey '^_' _cd_jump
 bindkey '^l' _my_clear
 
 alias light="sudo ~/LightTable/deploy/LightTable"
 
 alias ..='cd ..'
-alias show='ls --color -A --group-directories-first -l'
+alias show='ls --color -Alh --group-directories-first'
 alias sho='ls --color -A --group-directories-first'
+alias shotime='sho --sort=time'
+alias showtime='show --sort=time'
+alias shosize='sho --sort=size'
+alias showsize='show --sort=size'
 
 alias add='git add -A :/; git status'
 
 function commit() {
   git commit -m "$*"
 }
-alias commit=commit
 
 function cd_git() {
   cd $1
@@ -98,6 +101,7 @@ function git_stat() {
   pwd
 }
 
+alias commit=commit
 alias cd=cd_git
 alias pwd=git_stat
 
@@ -106,21 +110,12 @@ alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias pull='git pull'
 alias pp='pull; push'
 
-function note() {
-  cd ~/notes > /dev/null
-  rm lock.zip
-  git add --all
-  git commit -m 'delete zip'  >> /dev/null
-  echo -e "\n\033[0;35m$(date)\033[0m\n$*\n" >> notes.txt
-  zip lock.zip notes.txt --password "{{secret}}" > /dev/null
-  git add .
-  git commit -m 'add zip'  > /dev/null
-  git push origin master -q
-  cd - > /dev/null
-}
-
-alias note=note
-alias notes="tail -30 ~/notes/notes.txt"
+# function note() {
+#   # TODO
+# }
+#
+# alias note=note
+# alias notes="tail -30 ~/notes/notes.txt"
 
 function euler() {
   dir=$1
@@ -156,7 +151,7 @@ function euler() {
 
 alias e=euler
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 function log_git() {
   if [ $1 ]
@@ -205,11 +200,15 @@ export RABBITMQ_ADDRESS=tcp://10.129.242.20:1883
 venvwrap="virtualenvwrapper.sh"
 /usr/bin/which -a $venvwrap &> /dev/null
 if [ $? -eq 0 ]; then
-    venvwrap=`/usr/bin/which $venvwrap`
-    source $venvwrap
+  venvwrap=`/usr/bin/which $venvwrap`
+  source $venvwrap
 fi
 
 alias json="jazor --colorize"
 alias clip='xclip -selection c'
 alias paste='xclip -selection clipboard -o'
 alias cat='pygmentize -g'
+
+alias install='sudo apt-get install'
+alias update='sudo apt-get update'
+alias resu='sudo $SHELL -ic "$(fc -ln -1)"'
