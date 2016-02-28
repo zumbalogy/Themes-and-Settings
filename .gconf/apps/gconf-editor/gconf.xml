@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="recents" mtime="1456678174" type="list" ltype="string">
+		<li type="string">
+			<stringvalue>/desktop/gnome/thumbnailers/disable_all</stringvalue>
+		</li>
+		<li type="string">
+			<stringvalue>/apps/gnome-terminal/keybindings/save_contents</stringvalue>
+		</li>
+	</entry>
+</gconf>

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="disable_all" mtime="1456678178" type="bool" value="false"/>
+</gconf>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="save_contents" mtime="1456678066" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+</gconf>
