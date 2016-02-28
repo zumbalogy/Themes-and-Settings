@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="expanded" mtime="1454824557" type="bool" value="true"/>
+	<entry name="copy-on-import" mtime="1454824557" type="bool" value="false"/>
+</gconf>

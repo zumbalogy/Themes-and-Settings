@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="Intel_Skylake_HDMI-Capture" mtime="1453602833" type="bool" value="true"/>
+	<entry name="Intel_Skylake_HDMI-Mic_Boost" mtime="1453602832" type="bool" value="true"/>
+	<entry name="Intel_Skylake_HDMI-PCM" mtime="1453602832" type="bool" value="true"/>
+	<entry name="Intel_Skylake_HDMI-Speaker" mtime="1453602832" type="bool" value="true"/>
+	<entry name="Intel_Skylake_HDMI-Headphone" mtime="1453602832" type="bool" value="true"/>
+	<entry name="Intel_Skylake_HDMI-Master" mtime="1453602832" type="bool" value="true"/>
+</gconf>

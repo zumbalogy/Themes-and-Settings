@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="Intel_Skylake_HDMI-Auto-Mute_Mode" mtime="1453602833" type="string">
+		<stringvalue>Auto-Mute Mode</stringvalue>
+	</entry>
+	<entry name="Intel_Skylake_HDMI-IEC958" mtime="1453602833" type="string">
+		<stringvalue>IEC958</stringvalue>
+	</entry>
+</gconf>

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="Intel_Skylake_HDMI" mtime="1453602687" type="bool" value="true"/>
+</gconf>

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="notify_on_close" mtime="1454824564" type="bool" value="false"/>
+</gconf>

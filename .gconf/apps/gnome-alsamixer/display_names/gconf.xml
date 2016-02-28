@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="Intel_Skylake_HDMI" mtime="1453602687" type="string">
+		<stringvalue>Intel Skylake HDMI</stringvalue>
+	</entry>
+</gconf>

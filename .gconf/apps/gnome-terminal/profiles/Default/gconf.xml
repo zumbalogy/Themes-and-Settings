@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="exit_action" mtime="1453236445" type="string">
+		<stringvalue>close</stringvalue>
+	</entry>
+	<entry name="custom_command" mtime="1456599882" type="string">
+		<stringvalue>zsh</stringvalue>
+	</entry>
+	<entry name="use_custom_command" mtime="1456599882" type="bool" value="true"/>
+	<entry name="login_shell" mtime="1456599882" type="bool" value="true"/>
+	<entry name="default_show_menubar" mtime="1456599882" type="bool" value="false"/>
+	<entry name="scrollbar_position" mtime="1456599882" type="string">
+		<stringvalue>hidden</stringvalue>
+	</entry>
+	<entry name="scrollback_unlimited" mtime="1456599882" type="bool" value="true"/>
+	<entry name="scrollback_lines" mtime="1456599882" type="int" value="532"/>
+	<entry name="title" mtime="1456599882" type="string">
+		<stringvalue></stringvalue>
+	</entry>
+	<entry name="cursor_shape" mtime="1456599882" type="string">
+		<stringvalue>ibeam</stringvalue>
+	</entry>
+	<entry name="background_type" mtime="1453233796" type="string">
+		<stringvalue>solid</stringvalue>
+	</entry>
+	<entry name="visible_name" mtime="1456599882" type="string">
+		<stringvalue>Default</stringvalue>
+	</entry>
+	<entry name="foreground_color" mtime="1456599882" type="string">
+		<stringvalue>#000000000000</stringvalue>
+	</entry>
+	<entry name="background_color" mtime="1456599882" type="string">
+		<stringvalue>#FFFFFFFFDDDD</stringvalue>
+	</entry>
+	<entry name="silent_bell" mtime="1456599882" type="bool" value="true"/>
+	<entry name="bold_color" mtime="1456599882" type="string">
+		<stringvalue>#000000000000</stringvalue>
+	</entry>
+	<entry name="palette" mtime="1456599882" type="string">
+		<stringvalue>#2E2E34343636:#B85146A746A7:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#B3324C754C75:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC</stringvalue>
+	</entry>
+	<entry name="background_darkness" mtime="1456599882" type="float" value="0.94999998807907104"/>
+</gconf>

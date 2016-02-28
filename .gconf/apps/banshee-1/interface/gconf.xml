@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="show_context_pane" mtime="1454824556" type="bool" value="false"/>
+	<entry name="last_context_page" mtime="1454824556" type="string">
+		<stringvalue>wikipedia</stringvalue>
+	</entry>
+</gconf>
