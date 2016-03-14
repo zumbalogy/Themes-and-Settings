@@ -204,7 +204,8 @@ if [ $? -eq 0 ]; then
   source $venvwrap
 fi
 
-alias json="jazor --colorize"
+# TODO: get jazor back, it can sort without having to compile the latest jq
+alias json="jq -C '.'"
 alias clip='xclip -selection c'
 alias paste='xclip -selection clipboard -o'
 alias cat='pygmentize -g'
@@ -212,3 +213,17 @@ alias cat='pygmentize -g'
 alias install='sudo apt-get install'
 alias update='sudo apt-get update'
 alias resu='sudo $SHELL -ic "$(fc -ln -1)"'
+
+function trigger() {
+  if [ "$#" -eq 1 ]; then
+    first="."
+  else
+    first=$1
+    shift
+  fi
+  while inotifywait -rqe close_write $first;
+    do $SHELL -ic $*;
+  done
+}
+
+alias trigger='trigger'
