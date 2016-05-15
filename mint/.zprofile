@@ -237,6 +237,7 @@ function asrun() {
   as $1 -o $OBJPATH
   ld $OBJPATH -o $EXEPATH
   $EXEPATH
+  rm $EXEPATH
   echo $?
 }
 
