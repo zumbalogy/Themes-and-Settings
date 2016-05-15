@@ -9,6 +9,8 @@ date
 
 PROMPT="%{$fg_bold[green]%}%~%{$reset_color%}"$'\n'
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
 DIRSTACKSIZE=10
 DIRSTACKFILE=~/.zdirs
 setopt AUTO_PUSHD # TODO: autocomplete on cd-, and also have it not print
@@ -227,3 +229,18 @@ function trigger() {
 }
 
 alias trigger='trigger'
+
+function asrun() {
+  RAND=$(openssl rand -hex 40)
+  OBJPATH=$(echo /tmp/$(echo $RAND).o)
+  EXEPATH=$(echo /tmp/$(echo $RAND))
+  as $1 -o $OBJPATH
+  ld $OBJPATH -o $EXEPATH
+  $EXEPATH
+  echo $?
+}
+
+alias asrun='asrun'
+
+PATH=$PATH:/usr/lib/postgresql/9.1/bin
+export PATH
