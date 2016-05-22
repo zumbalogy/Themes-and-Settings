@@ -1,8 +1,8 @@
 # source ~/.profile
 
 autoload -U colors && colors
-
-git config --global color.ui auto
+git config --global color.ui always
+git config --global color.status always
 
 date
 (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
@@ -87,30 +87,33 @@ alias showtime='show --sort=time'
 alias shosize='sho --sort=size'
 alias showsize='show --sort=size'
 
-alias add='git add -A :/; git status'
-
-function commit() {
+function git_commit() {
   git commit -m "$*"
 }
 
-function cd_git() {
+function git_cd() {
   cd $1
   (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
 }
 
 function git_stat() {
-  (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git status)\033[0m")
-  pwd
+  (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "$(git status -sb)")
 }
 
-alias commit=commit
-alias cd=cd_git
-alias pwd=git_stat
+alias cd='git_cd'
+alias pwd='git_stat; pwd'
 
-alias diff='git diff HEAD'
+alias add='git add -A :/; git_stat'
+alias stat='git diff HEAD --stat'
+alias commit='git_commit'
+alias diff='git diff HEAD | diff-highlight | ~/projects/diff-so-fancy/lib/diff-so-fancy.pl | less -RFX'
 alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias pull='git pull'
 alias pp='pull; push'
+
+# TODO: want to chance branches after i make it. i guess checkout -b works
+# alias branch="git branch --track $1; git checkout $1"
+# alias branches='git branch -a'
 
 # function note() {
 #   # TODO
@@ -194,12 +197,12 @@ alias -s rb=ruby
 alias -s js=node
 alias -s jl=julia
 alias -s coffee=coffee
-alias -s clj="lein exec"
+alias -s clj='lein exec'
 
 export RABBITMQ_ADDRESS=tcp://10.129.242.20:1883
 
 # load virtualenvwrapper for python (after custom PATHs)
-venvwrap="virtualenvwrapper.sh"
+venvwrap='virtualenvwrapper.sh'
 /usr/bin/which -a $venvwrap &> /dev/null
 if [ $? -eq 0 ]; then
   venvwrap=`/usr/bin/which $venvwrap`
@@ -207,6 +210,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # TODO: get jazor back, it can sort without having to compile the latest jq
+# TODO: if cant parse, just cat it
 alias json="jq -C '.'"
 alias clip='xclip -selection c'
 alias paste='xclip -selection clipboard -o'
