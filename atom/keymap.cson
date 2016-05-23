@@ -22,3 +22,12 @@
 'atom-workspace atom-text-editor:not([mini])':
   'ctrl-]': 'editor:indent-selected-rows'
   'ctrl-[': 'editor:outdent-selected-rows'
+  
+# current one: 
+
+'.workspace .editor:not(.mini)':
+  'alt-enter': 'proto-repl:execute-block'
+  'alt-shift-enter': 'proto-repl:execute-top-block'
+  'alt-ctrl-enter': 'proto-repl:execute-selected-text'
+  'ctrl-alt': 'dummy'
+  'alt': 'dummy'
