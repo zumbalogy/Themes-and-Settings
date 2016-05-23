@@ -240,9 +240,9 @@ function asrun() {
   EXEPATH=$(echo /tmp/$(echo $RAND))
   as $1 -o $OBJPATH &&
   ld $OBJPATH -o $EXEPATH &&
-  $EXEPATH &&
-  echo $? &&
-  rm $EXEPATH &&
+  $EXEPATH
+  echo $?
+  rm $EXEPATH &>/dev/null
 }
 
 alias asrun='asrun'
