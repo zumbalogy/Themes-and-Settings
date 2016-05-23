@@ -238,11 +238,11 @@ function asrun() {
   RAND=$(openssl rand -hex 40)
   OBJPATH=$(echo /tmp/$(echo $RAND).o)
   EXEPATH=$(echo /tmp/$(echo $RAND))
-  as $1 -o $OBJPATH
-  ld $OBJPATH -o $EXEPATH
-  $EXEPATH
-  echo $?
-  rm $EXEPATH
+  as $1 -o $OBJPATH &&
+  ld $OBJPATH -o $EXEPATH &&
+  $EXEPATH &&
+  echo $? &&
+  rm $EXEPATH &&
 }
 
 alias asrun='asrun'
