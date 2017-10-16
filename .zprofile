@@ -134,6 +134,12 @@ alias pp='pull; push'
 # alias note=note
 # alias notes="tail -30 ~/notes/notes.txt"
 
+function run_fortran() {
+  gfortran -o $1.fortran_exe $1.f90
+  $1.fortran_exe
+  rm $1.fortran_exe
+}
+
 function euler() {
   dir=$1
   file=$1
@@ -157,6 +163,9 @@ function euler() {
     clojure ) lein exec $location.clj;;
     racket  ) racket $location.rkt;;
     rkt     ) racket $location.rkt;;
+    fortran ) run_fortran $location;;
+    f90     ) run_fortran $location;;
+    fort    ) run_fortran $location;;
     java    )
       javac $location.java
       java -classpath ~/euler/$dir $file
@@ -263,5 +272,12 @@ mkdir -p ~/bin
 PATH=$PATH:~/bin
 export PATH
 
+mkdir -p /bin
+PATH=$PATH:/bin
+export PATH
+
 PATH=$PATH:/usr/lib/postgresql/9.1/bin
+export PATH
+
+PATH=$PATH:/home/ash/.local/bin
 export PATH
