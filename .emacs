@@ -32,15 +32,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 
 (setq column-number-mode t)
 
 (setq-default cursor-type 'bar)
 
 (set-face-attribute 'default nil :height 130)
+
+(setq-default indent-tabs-mode nil)
 
 ;; (show-paren-mode 1) 'package)
 
@@ -62,7 +64,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (load-theme 'atom-one-dark t)
+;(load-theme 'atom-one-dark t)
 
 (require 'doom-themes)
 
@@ -164,6 +166,9 @@
 ;; learn/get better file/project navigation (neotree?) (control-k in atom?)
 ;; fuzzy find stuff (helm?)
 ;; better toggle though buffers and frames. (but mostly frames)
+;; tweak timeouts on echo area messages and all that
+;; filter some messages (or tweak them) that go in echo area
+;;    (https://www.emacswiki.org/emacs/EchoArea)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -228,5 +233,16 @@
 
 (symon-mode)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(with-current-buffer " *Echo Area 0*" (face-remap-add-relative 'default :background "#222"))
+(with-current-buffer " *Echo Area 1*" (face-remap-add-relative 'default :background "#222"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(fringe-mode 0)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; TODO: look into window-divider-mode
+;; https://emacs.stackexchange.com/questions/29873/whats-this-line-between-the-modeline-and-the-echo-area
