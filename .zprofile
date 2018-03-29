@@ -291,9 +291,16 @@ PATH=$PATH:~/bin
 mkdir -p /bin
 PATH=$PATH:/bin
 
+mkdir -p /bin
+PATH=$PATH:/bin
+export PATH
+
 PATH=$PATH:/usr/lib/postgresql/9.1/bin
 PATH=$PATH:/home/ash/.local/bin
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:/home/ash/.cargo/bin
 
+export PATH
+
+PATH=$PATH:/home/ash/.local/bin
 export PATH
