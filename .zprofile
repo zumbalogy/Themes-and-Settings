@@ -4,6 +4,9 @@ autoload -U colors && colors
 git config --global color.ui always
 git config --global color.status always
 
+zstyle ':completion:*' special-dirs true
+
+
 date
 (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
 
@@ -119,6 +122,7 @@ alias add='git add -A :/; git_stat'
 alias stat='git diff HEAD --stat'
 alias commit='git_commit'
 alias dif='git diff HEAD | diff-highlight | ~/projects/diff-so-fancy/lib/diff-so-fancy.pl | less -RFX'
+alias diff='git diff HEAD | diff-highlight | ~/projects/diff-so-fancy/lib/diff-so-fancy.pl | less -RFX'
 alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias pull='git pull'
 alias pp='pull; push'
@@ -133,6 +137,12 @@ alias pp='pull; push'
 #
 # alias note=note
 # alias notes="tail -30 ~/notes/notes.txt"
+
+function run_fortran() {
+  gfortran -o $1.fortran_exe $1.f90
+  $1.fortran_exe
+  rm $1.fortran_exe
+}
 
 function euler() {
   dir=$1
@@ -157,6 +167,9 @@ function euler() {
     clojure ) lein exec $location.clj;;
     racket  ) racket $location.rkt;;
     rkt     ) racket $location.rkt;;
+    fortran ) run_fortran $location;;
+    f90     ) run_fortran $location;;
+    fort    ) run_fortran $location;;
     java    )
       javac $location.java
       java -classpath ~/euler/$dir $file
@@ -259,9 +272,28 @@ function asrun() {
 
 alias asrun='asrun'
 
+export MITSCHEME_LIBRARY_PATH=~/mit-scheme-plugins:/usr/local/lib/mit-scheme
+export MITSCHEME_LIBRARY_PATH=~/mit-scheme-plugins:/usr/local/lib/mit-scheme-x86-64
+
+function my_scheme() {
+  if [[ $# -eq 0 ]] ; then
+    rlwrap -r -c -f ~/Themes-and-Settings/mit_scheme_bindings.txt mit-scheme
+  else
+    mit-scheme --quiet < $1
+  fi
+}
+
+alias scheme='my_scheme'
+
 mkdir -p ~/bin
 PATH=$PATH:~/bin
-export PATH
+
+mkdir -p /bin
+PATH=$PATH:/bin
 
 PATH=$PATH:/usr/lib/postgresql/9.1/bin
+PATH=$PATH:/home/ash/.local/bin
+PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:/home/ash/.cargo/bin
+
 export PATH
