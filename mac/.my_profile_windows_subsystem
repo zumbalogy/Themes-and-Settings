@@ -16,8 +16,8 @@ git config --global color.ui auto
 PS1="\e[32;01m\w\e[0m \n"
 
 alias ..='cd ..'
-alias show='gls --color -A --group-directories-first -l'
-alias sho='gls --color -A --group-directories-first'
+alias show='ls --color -A --group-directories-first -l'
+alias sho='ls --color -A --group-directories-first'
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
