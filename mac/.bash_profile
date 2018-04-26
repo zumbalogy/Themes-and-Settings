@@ -46,7 +46,128 @@ function cd_git(){
 }
 
 function git_stat(){
-  (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git status)\033[0m")clear
+  (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git status)\033[0m")clearclear
+Date
+(git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
+
+
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+git config --global color.ui auto
+
+# "path/to/where/you/are"
+PS1="\e[32;01m\w\e[0m \n"
+
+alias ..='cd ..'
+alias show='gls --color -A --group-directories-first -l'
+alias sho='gls --color -A --group-directories-first'
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\eOA": history-search-backward'
+
+bind -x '"\C-l": date; clear'
+
+alias nano='nano -E'
+
+function git_commit() {
+  git commit -m "$*"
+}
+
+function git_cd() {
+  cd $1
+  (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
+}
+
+function git_stat() {
+  (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "$(git status -sb)")
+}
+
+function git_branch() {
+  if [[ $(git branch -a) =~ $1 ]]; then
+    git checkout $1
+  else
+    git checkout -b $1
+    git push origin $(git rev-parse --abbrev-ref HEAD)
+    git branch --set-upstream-to=origin/$1 $1
+  fi
+}
+
+alias cd='git_cd'
+alias pwd='git_stat; pwd'
+
+git config --global core.pager "diff-so-fancy | less -RFX"
+
+alias branch='git_branch'
+alias add='git add -A :/; git_stat'
+alias stat='git diff HEAD --stat'
+alias commit='git_commit'
+alias dif='git diff HEAD'
+alias diff='git diff HEAD'
+alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias pull='git pull'
+alias pp='pull; push'
+
+function log_git() {
+  if [ $1 ]
+    then
+    count=$1
+  else
+    count=4
+  fi
+  git log -${count} --pretty=format:"%C(blue)%h %ar%C(reset) %an: %s%n" --stat | ruby -e '
+    while a = gets
+      next if a.match(/\d+ fil(e|es) changed, \d+ insertio(n|ns)\(\+\), \d+ deletion/)
+      if (m = a.match(/.*\//)) && a.match(/(\+|\-)/)
+        len = m.to_s.length
+        a.sub!(" +", (" " * len) + "+")
+        a.sub!(" -", (" " * len) + "-")
+        a.sub!(m.to_s, "")
+      end
+      a.sub!("+", "\033[32m+")
+      a.sub!("-", "\033[31m-")
+      a += "\033[0m"
+      a.gsub!(/ \|\s+\d+ /, " ")
+      print a
+    end
+  '
+}
+# could maybe use grep -v, instead, to remove results.
+
+function log() {
+  if [ $1 == "git" ]
+    then
+    log_git $2
+  fi
+}
+
+alias log='log'
+
+
+alias resu='sudo $SHELL -ic "$(fc -ln -1)"'
+
+alias cat='pygmentize -g'
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export OCI_LIB_DIR=/opt/oracle/Software/instantclient
+export OCI_INC_DIR=/opt/oracle/Software/instantclient/sdk/include
+
+
+# this is in ~/.inputrc
+# https://superuser.com/questions/90196/case-insensitive-tab-completion-in-bash
+# set completion-ignore-case on
+# set show-all-if-ambiguous on
+# TAB: menu-complete
 Date
 (git rev-parse --is-inside-work-tree &> /dev/null && echo -e "\033[0;35m$(git rev-parse --abbrev-ref HEAD)\033[0m")
 
