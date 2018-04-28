@@ -1,10 +1,24 @@
 # source ~/.profile
 
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
+
 autoload -U colors && colors
 git config --global color.ui always
 git config --global color.status always
 
 zstyle ':completion:*' special-dirs true
+
+# https://superuser.com/questions/415650/does-a-fuzzy-matching-mode-exist-for-the-zsh-shell
+# 0 -- vanilla completion (abc => abc)
+# 1 -- smart case completion (abc => Abc)
+# 2 -- word flex completion (abc => A-big-Car)
+# 3 -- full flex completion (abc => ABraCadabra)
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
 
 
 date
@@ -285,22 +299,30 @@ function my_scheme() {
 
 alias scheme='my_scheme'
 
+function tre() {
+  tree --dirsfirst -I '.git' -avhC $* | 
+  sed "s|\[01\.34m\(.*$\)|$(tput setaf 6)\1|g" | 
+  sed "s|\[\(.*\)] |\1|g" |
+  sed 's|──|─|g' |
+  sed 's| \([├└│]\)|\1|g'
+}
+
+alias tre='tre'
+alias tree='tre -L 2'
+alias treee='tre -L 3'
+alias treeee='tre -L 4'
+alias treeeee='tre -L 5'
+alias treeeeee='tre -L 6'
+
 mkdir -p ~/bin
 PATH=$PATH:~/bin
 
 mkdir -p /bin
 PATH=$PATH:/bin
 
-mkdir -p /bin
-PATH=$PATH:/bin
-export PATH
-
 PATH=$PATH:/usr/lib/postgresql/9.1/bin
 PATH=$PATH:/home/ash/.local/bin
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:/home/ash/.cargo/bin
 
-export PATH
-
-PATH=$PATH:/home/ash/.local/bin
 export PATH
