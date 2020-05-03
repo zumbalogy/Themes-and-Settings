@@ -1,94 +1,167 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
+# Gaurd against non-interactive shells
+[[ $- == *i* ]] || return
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
+#########################################################
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+function red() { echo "$(tput setaf 1)$*$(tput sgr0)"; }
+function green() { echo "$(tput setaf 2)$*$(tput sgr0)"; }
+function yellow() { echo "$(tput setaf 3)$*$(tput sgr0)"; }
+function pink() { echo "$(tput setaf 5)$*$(tput sgr0)"; }
+function teal() { echo "$(tput setaf 11)$*$(tput sgr0)"; }
 
-export PATH=$HOME/bin:$PATH
+function bold() { echo "$(tput bold)$*$(tput sgr0)"; }
 
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+#########################################################
 
-alias light="sudo ~/LightTable/deploy/LightTable"
+# Prompt: \w is current dir
+PS1="$(bold $(teal \\w)) \n"
 
-# prompt colors
-# "username@hostname:"
-# PS1="\e[34;01m\u\e[0m\e[31;01m\h\e[0m"
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
- 
-# "path/to/where/you/are"
-PS1="\e[32;01m\w\e[0m \n"
- 
-
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\eOA": history-search-backward'
-
-git config --global color.ui auto
-
-alias add='git add -A :/; git status'
-
-function commit() {
-    git commit -m "$*"
-}
-alias commit=commit
-
-alias red='redshift -l 41.1:-73.4 -v -t'
-
-alias mongo='mongod --dbpath ~/mongodb-linux-x86_64-2.4.9/data/'
-
-
-function euler() {
-  if [ $1 == "rb" ]
-    then
-    ruby ~/euler/p$2/p$2.rb
-  elif [ $1 == "js" ]
-    then
-    nodejs ~/euler/p$2/p$2.js
-  fi
-}
-
-alias e=euler
-
-alias v='vim -c "source ~/.vimrc"'
-
-alias show='ls -Ahog  --group-directories-first'
-alias sho='ls -A --group-directories-first'
-
-alias ..='cd ..'
-
-function cd_git(){
-    cd $1
-    ( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")
-}    
-
-function git_stat(){
-  (__gitdir &>/dev/null && echo -e "\e[0;35m$(git status)\e[0m")
-  pwd
-}
-
-alias cd=cd_git
-alias pwd=git_stat
-
-( __gitdir &>/dev/null  && echo -e "\e[0;35m$(git rev-parse --abbrev-ref HEAD)\e[0m")
-
-
-
-alias diff='git diff HEAD'
-alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
-
+#########################################################
 
 shopt -s histappend
 
-HISTFILESIZE=5000
-HISTSIZE=1000
-HISTCONTROL=ignoredups
+HISTCONTROL=ignoredups:erasedups
+HISTFILESIZE=9000
+HISTSIZE=9000
 HISTIGNORE='sho:add'
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+#########################################################
+
+function has_git() {
+  git rev-parse --is-inside-work-tree &> /dev/null
+}
+
+function git_branch() {
+  has_git && pink $(git rev-parse --abbrev-ref HEAD)
+}
+
+function cd_git() {
+  cd $1
+  git_branch
+}
+
+function commit() {
+  git commit -m "$*"
+}
+
+function branch() {
+  if [ -z "$1" ]; then
+    git branch
+    return
+  fi
+
+  if [ "$*" = '-' ]; then
+    git checkout -
+    return
+  fi
+
+  git show-ref --verify --quiet refs/heads/"$1"
+
+  if [ $? = 0 ]; then
+    git checkout $*
+    return
+  fi
+
+  read -p "New Branch $* [Y/n] " reply
+  reply=${reply,,} # downcase
+
+  if [[ $reply =~ ^(yes|y| ) ]] || [[ -z $reply ]]; then
+    git checkout -b $*
+  else
+    echo "Cancelled"
+  fi
+}
+
+function status() {
+  git_branch
+  git diff HEAD --shortstat | sed 's/ changed//; s/([-+])//g'
+  echo ''
+  git diff HEAD --compact-summary --color | \
+  sed \$d | \
+  sed -r "s/(.*)\(new\)/$(green 'A') \1     /" | \
+  sed -r "s/(.*)\(new ..\)/$(green 'A') \1        /" | \
+  sed -r "s/(.*)\(gone\)/$(red 'D') \1      /" | \
+  sed -r "s/^ (.*)/$(yellow 'M')  \1/" | \
+  sed "s/------------------/-----------------/" | \
+  sed "s/++++++++++++++++++/+++++++++++++++++/"
+}
+
+# https://github.com/so-fancy/diff-so-fancy
+git config --global core.pager "diff-so-fancy | less -RFX"
+git config --global color.ui auto
+
+alias add='git add -A :/; status'
+
+alias cd=cd_git
+
+alias dif='git diff HEAD'
+alias diff='git diff HEAD'
+
+alias push='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias pull='git pull'
+alias pp='pull; push'
+
+#########################################################
+
+alias ..='cd ..'
+
+alias resu='sudo $(history -p !!)'
+
+# https://github.com/ogham/exa
+# alias sho='ls --color -A --group-directories-first'
+alias sho='exa -a --group-directories-first'
+alias show='sho -l'
+
+#########################################################
+
+# https://github.com/sharkdp/bat
+alias cat='bat'
+
+alias log='git log | bat --style="grid"'
+
+# https://github.com/eth-p/bat-extras
+alias batman='~/bat-extras/src/batman.sh'
+alias man='batman'
+
+alias batgrep='~/bat-extras/src/batgrep.sh'
+
+function gg() {
+  if [ -t 0 ]; then
+    batgrep --smart-case --color $* | bat --style="grid"
+    return
+  fi
+  rg --pretty --context 2 $*
+}
+
+#########################################################
+
+# https://github.com/yaa110/cb
+function copy() {
+  if (( $# == 0 )); then
+    cb
+    return
+  fi
+  cb -t "$*"
+}
+
+alias paste='cb -p'
+
+#########################################################
+
+# https://github.com/sharkdp/fd
+# https://github.com/BurntSushi/ripgrep
+export PATH="$HOME/.cargo/bin:$PATH"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+
+#########################################################
+
+date
+git_branch
