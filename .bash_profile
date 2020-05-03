@@ -8,8 +8,8 @@
 # ocean next
 # background #21272B
 
-function color() { echo "$(tput setaf $1)${@:2}$(tput sgr0)"; }
 function bold() { echo "$(tput bold)$*$(tput sgr0)"; }
+function color() { echo "$(tput setaf $1)${@:2}$(tput sgr0)"; }
 
 alias red="color 1"
 alias green="color 2"
@@ -21,20 +21,18 @@ alias pink="color 5"
 
 # Prompt: \w is current dir
 PS1="$(bold $(blue \\w)) \n"
-
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 #########################################################
 
 shopt -s histappend
-
-HISTCONTROL=ignoredups:erasedups
-HISTFILESIZE=9000
-HISTSIZE=9000
-HISTIGNORE='sho:add'
-
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+HISTIGNORE='sho:add'
+HISTSIZE=9000
+HISTFILESIZE=9000
+HISTCONTROL=ignoredups:erasedups
 
 #########################################################
 
@@ -114,8 +112,8 @@ alias pp='pull; push'
 
 #########################################################
 
-alias ..='cd ..'
 alias ~='cd ~'
+alias ..='cd ..'
 alias -- -='cd -'
 
 alias resu='sudo $(history -p !!)'
@@ -136,6 +134,7 @@ alias log='git log | bat --style="grid"'
 alias batman='~/bat-extras/src/batman.sh'
 alias man='batman'
 
+# https://github.com/BurntSushi/ripgrep
 alias batgrep='~/bat-extras/src/batgrep.sh'
 
 function gg() {
@@ -162,7 +161,6 @@ alias paste='cb -p'
 #########################################################
 
 # https://github.com/sharkdp/fd
-# https://github.com/BurntSushi/ripgrep
 export PATH="$HOME/.cargo/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
