@@ -3,18 +3,24 @@
 
 #########################################################
 
-function red() { echo "$(tput setaf 1)$*$(tput sgr0)"; }
-function green() { echo "$(tput setaf 2)$*$(tput sgr0)"; }
-function yellow() { echo "$(tput setaf 3)$*$(tput sgr0)"; }
-function pink() { echo "$(tput setaf 5)$*$(tput sgr0)"; }
-function teal() { echo "$(tput setaf 11)$*$(tput sgr0)"; }
+# https://github.com/Mayccoll/Gogh
+# bash -c  "$(wget -qO- https://git.io/vQgMr)"
+# ocean next
+# background #21272B
 
+function color() { echo "$(tput setaf $1)${@:2}$(tput sgr0)"; }
 function bold() { echo "$(tput bold)$*$(tput sgr0)"; }
+
+alias red="color 1"
+alias green="color 2"
+alias yellow="color 3"
+alias blue="color 4"
+alias pink="color 5"
 
 #########################################################
 
 # Prompt: \w is current dir
-PS1="$(bold $(teal \\w)) \n"
+PS1="$(bold $(blue \\w)) \n"
 
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
@@ -109,6 +115,8 @@ alias pp='pull; push'
 #########################################################
 
 alias ..='cd ..'
+alias ~='cd ~'
+alias -- -='cd -'
 
 alias resu='sudo $(history -p !!)'
 
