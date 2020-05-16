@@ -1,56 +1,12 @@
-atom-workspace-axis atom-pane-container atom-pane {
-  padding-top: 0px;
-  padding-right: 0px;
-  border-left: 1px solid #181a1f;
-  div.item-views {
-    border-left: 0;
-  }
-}
-
-ul.tab-bar {
-  li.tab::before {
-    width: 0;
-  }
-  li.tab::after, li.tab.active::after {
-    border-radius: 0;
-    background-image: none;
-    border-left: 0;
-    opacity: 0;
-  }
-  li.tab.sortable {
-    border: 0;
-    border-right: 1px solid #181818;
-  }
-  li.tab.active {
-    border-bottom: 1px solid #181818;
-    border-radius: 0;
-  }
-}
-.tab-bar .tab.active, .tab-bar .tab.active + .tab {
-  border-image: none;
-}
-
-atom-panel.tool-panel {
-  ol.tree-view {
-    // background-color: #21252b;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  span.icon::before {
-    display: none;
-  }
-}
-
-.scrollbars-visible-always /deep/ ::-webkit-scrollbar-thumb {
+.atom-dock-toggle-button.left {
   display: none;
 }
 
-::-webkit-scrollbar {
+atom-panel-container.left .list-inline.tab-bar.inset-panel {
   display: none;
 }
 
-atom-text-editor.is-focused::shadow {
-  .line.cursor-line, .line-number.cursor-line-no-selection {
-    background-color: transparent;
-  }
+.scrollbars-visible-always atom-panel-container.left ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
