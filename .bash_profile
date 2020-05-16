@@ -3,6 +3,12 @@
 
 #########################################################
 
+function isInt() {
+  [ "$1" -eq "$1" ] 2>/dev/null
+}
+
+#########################################################
+
 # https://github.com/Mayccoll/Gogh
 # bash -c  "$(wget -qO- https://git.io/vQgMr)"
 # ocean next
@@ -53,9 +59,50 @@ function commit() {
   git commit -m "$*"
 }
 
+function git_select() {
+  branches=($(git branch | tr '*' ' '))
+
+  while true; do
+    current_branch=$(git symbolic-ref --short HEAD)
+    i=1
+    for b in "${branches[@]}"; do
+      if [ "$b" = "$current_branch" ]; then
+        color 2 "$i) $b"
+      else
+        echo "$i) $b"
+      fi
+      let i++
+    done
+
+    read -p "> " reply
+
+    [ -z "$reply" ] && break
+
+    if ((isInt $reply) && [ "$i" -gt "$reply" ]); then
+      git checkout "${branches[reply - 1]}"
+      break
+    fi
+
+    branches=($(printf -- '%s\n' "${branches[@]}" | rg "$reply"))
+    len=${#branches[@]}
+
+    if [ "$len" -eq "1" ]; then
+      git checkout "${branches[0]}"
+      break
+    fi
+
+    if [ "$len" -eq "0" ]; then
+      echo "Not Found"
+      break
+    fi
+
+    echo ''
+  done
+}
+
 function branch() {
   if [ -z "$1" ]; then
-    git branch
+    git_select
     return
   fi
 
@@ -112,9 +159,22 @@ alias pp='pull; push'
 
 #########################################################
 
+function row {
+  sed "$1q;d" ${@:2}
+}
+
+function col {
+  local awk_cmd="awk '{print \$$1}'"
+  eval $awk_cmd ${@:2}
+}
+
+#########################################################
+
 alias ~='cd ~'
 alias ..='cd ..'
 alias -- -='cd -'
+
+alias ffirst="row 1 | col 1"
 
 alias resu='sudo $(history -p !!)'
 
@@ -142,7 +202,7 @@ function gg() {
     batgrep --smart-case --color $* | bat --style="grid"
     return
   fi
-  rg --pretty --context 2 $*
+  rg --smart-case --pretty --context 2 $*
 }
 
 #########################################################
@@ -166,6 +226,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 [[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+
+#########################################################
+
+source ~/ronin/.bash_profile
 
 #########################################################
 
